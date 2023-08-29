@@ -1,7 +1,7 @@
 package com.example.patinhas;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent; // Importe a classe Intent
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText nomeEditText, senhaEditText;
     private Button loginButton;
+    private UsuarioDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +22,7 @@ public class MainActivity extends AppCompatActivity {
         nomeEditText = findViewById(R.id.editTextText3);
         senhaEditText = findViewById(R.id.editTextTextPassword);
         loginButton = findViewById(R.id.button3);
-
-        // appDataBase = new AppDataBase(this);
-
+        dao = new UsuarioDAO(this);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,9 +30,8 @@ public class MainActivity extends AppCompatActivity {
                 String senha = senhaEditText.getText().toString();
 
                 if (verificarLogin(nome, senha)) {
-                    // Login bem-sucedido, direcione para a próxima tela
-                    // Implemente essa parte de acordo com o seu fluxo de navegação
-                    // Por exemplo: startActivity(new Intent(MainActivity.this, TelaPrincipal.class));
+                    Intent intent = new Intent(MainActivity.this, Opcoes.class);
+                    startActivity(intent);
                 } else {
                     // Login falhou, exiba mensagem de erro
                     Toast.makeText(MainActivity.this, "Login falhou. Verifique suas credenciais.", Toast.LENGTH_SHORT).show();
@@ -58,12 +56,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
-}
 
-    private boolean verificarLogin(String nome, String senha) {
-        // Lógica de verificação de login
-        // Implemente de acordo com o seu sistema de autenticação
-        return false;
+    private boolean verificarLogin(String email, String senha) {
+        return dao.verificarLogin(email, senha);
     }
 }

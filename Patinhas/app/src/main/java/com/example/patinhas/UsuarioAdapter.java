@@ -36,30 +36,30 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
         return usuarios.size();
     }
 
-    public static class UsuarioViewHolder extends RecyclerView.ViewHolder {
+    public class UsuarioViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView nomeTextView, datanascTextView, emailTextView, senhaTextView, estadoTextView,cidadeTextView ;
+        private TextView nomeTextView, datanascTextView, emailTextView, senhaTextView, estadoTextView, cidadeTextView;
 
         public UsuarioViewHolder(@NonNull View itemView) {
             super(itemView);
-            nomeTextView = itemView.findViewById(R.id.editTextText);
-            datanascTextView=itemView.findViewById(R.id.editTextText2);
-            emailTextView = itemView.findViewById(R.id.editTextText5);
-            senhaTextView = itemView.findViewById(R.id.editTextText4);
-            estadoTextView = itemView.findViewById(R.id.editTextText6);
-            cidadeTextView = itemView.findViewById(R.id.editTextText7);
+            nomeTextView = itemView.findViewById(R.id.nomeTextView);
+            datanascTextView = itemView.findViewById(R.id.datanascTextView);
+            emailTextView = itemView.findViewById(R.id.emailTextView);
+            senhaTextView = itemView.findViewById(R.id.senhaTextView);
+            estadoTextView = itemView.findViewById(R.id.estadoTextView);
+            cidadeTextView = itemView.findViewById(R.id.cidadeTextView);
 
         }
 
         public void bind(Login usuario) {
             nomeTextView.setText(usuario.getNome());
-            datanascTextView.setText(String.valueOf(usuario.getDataNascimento()));
+            datanascTextView.setText(usuario.getDataNascimento());
             emailTextView.setText(usuario.getEmail());
             senhaTextView.setText(usuario.getSenha());
             estadoTextView.setText(usuario.getEstado());
             cidadeTextView.setText(usuario.getCidade());
         }
-        }
+    }
     }
 
 

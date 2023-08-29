@@ -27,6 +27,12 @@ public class UsuarioDAO {
         values.put("cidade", login.getCidade());
         return db.insert("login", null, values);
     }
+    public boolean verificarLogin(String email, String senha) {
+        Cursor cursor = db.query("login", new String[]{"id"}, "email = ? AND senha = ?", new String[]{email, senha}, null, null, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count > 0;
+    }
 
     public List<Login> obterTodos(){
         List<Login> usuarios = new ArrayList<>();
@@ -45,4 +51,6 @@ public class UsuarioDAO {
         }
         return usuarios;
     }
+
+
 }
