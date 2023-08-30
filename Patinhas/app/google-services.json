@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "301660420861",
+    "project_id": "patinhas-74674",
+    "storage_bucket": "patinhas-74674.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301660420861:android:be5cbc29cec67dad521c94",
+        "android_client_info": {
+          "package_name": "com.example.patinhas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301660420861-ncsm5joti1q83j1p7kf048jd4o3d6dps.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq-s9Cr-BurXYEnCitaaSjzoPRyQjQ0_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301660420861-ncsm5joti1q83j1p7kf048jd4o3d6dps.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
