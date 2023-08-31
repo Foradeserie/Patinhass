@@ -7,14 +7,24 @@
     android:background="#9ca4dc"
     tools:context=".Opcoes">
 
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hello"
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="163dp"
+        android:layout_height="202dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="220dp"
+        android:text="Adotar"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="150dp"
+        android:layout_height="207dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="32dp"
+        android:text="Cadastrar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
