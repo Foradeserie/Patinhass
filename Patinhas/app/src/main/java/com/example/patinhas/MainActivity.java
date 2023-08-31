@@ -21,8 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
         nomeEditText = findViewById(R.id.editTextText3);
         senhaEditText = findViewById(R.id.editTextTextPassword);
-        loginButton = findViewById(R.id.button3);
+
         dao = new UsuarioDAO(this);
+        Button loginButton = findViewById(R.id.button3);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, Opcoes.class);
                     startActivity(intent);
                 } else {
-                    // Login falhou, exiba mensagem de erro
                     Toast.makeText(MainActivity.this, "Login falhou. Verifique suas credenciais.", Toast.LENGTH_SHORT).show();
                 }
             }
