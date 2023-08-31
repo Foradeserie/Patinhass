@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Patinhas"
         tools:targetApi="31">
+         <activity
+        android:name=".Opcoes"
+        android:exported="false" /> <!-- Certifique-se de definir "exported" como "false" para controlar o acesso à atividade -->
         <activity
             android:name=".listar_usuarios"
             android:exported="false" />
