@@ -14,16 +14,7 @@ public class Login implements Serializable {
     public Login(){
 
     }
-//
-//    public Login(String nome, String dataNascimento,String email,String senha, String estado, String cidade ){
-//        this.nome=nome;
-//        this.dataNascimento=dataNascimento;
-//        this.email=email;
-//        this.senha=senha;
-//        this.estado=estado;
-//        this.cidade=cidade;
-//
-//    }
+
     public String getNome() {
         return nome;
     }

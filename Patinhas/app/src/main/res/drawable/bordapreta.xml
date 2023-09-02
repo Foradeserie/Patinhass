@@ -2,7 +2,6 @@
 <!-- Adicione a borda preta como um item de fundo -->
 <item>
     <shape>
-        <solid android:color="#FFFFFF" /> <!-- Cor branca (#FFFFFF) ou outra cor de fundo desejada -->
         <stroke
             android:width="2dp"
             android:color="#000000" /> <!-- Cor preta (#000000) -->

@@ -18,6 +18,8 @@ public class Conexao extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table login(id integer primary key autoincrement, nome varchar(50), dataNascimento int, email varchar(50), " +
                 "senha varchar(10), estado varchar(50), cidade varchar(50))");
+
+        db.execSQL("create table cadastroanimal(id integer primary key autoincrement, nome varchar(20), porte varchar(20),raça varchar(30),Idade int, gênero Varchar(10))");
     }
 
     @Override
