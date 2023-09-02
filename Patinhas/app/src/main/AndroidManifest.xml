@@ -13,9 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Patinhas"
         tools:targetApi="31">
-        <activity
-            android:name=".Opcoes"
-            android:exported="false" />
+         <activity
+        android:name=".Opcoes"
+        android:exported="false"/>
         <activity
             android:name=".listar_usuarios"
             android:exported="false" />
