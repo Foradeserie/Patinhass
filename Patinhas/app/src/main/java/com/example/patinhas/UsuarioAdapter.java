@@ -48,7 +48,6 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
             senhaTextView = itemView.findViewById(R.id.senhaTextView);
             estadoTextView = itemView.findViewById(R.id.estadoTextView);
             cidadeTextView = itemView.findViewById(R.id.cidadeTextView);
-
         }
 
         public void bind(Login usuario) {
@@ -60,6 +59,4 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
             cidadeTextView.setText(usuario.getCidade());
         }
     }
-    }
-
-
+}

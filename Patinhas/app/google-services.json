@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "301660420861",
-    "project_id": "patinhas-74674",
-    "storage_bucket": "patinhas-74674.appspot.com"
+    "project_number": "178864766490",
+    "project_id": "patinhas-1c262",
+    "storage_bucket": "patinhas-1c262.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:301660420861:android:be5cbc29cec67dad521c94",
+        "mobilesdk_app_id": "1:178864766490:android:64508fe41898ce869b5ba3",
         "android_client_info": {
           "package_name": "com.example.patinhas"
         }
       },
       "oauth_client": [
         {
-          "client_id": "301660420861-ncsm5joti1q83j1p7kf048jd4o3d6dps.apps.googleusercontent.com",
+          "client_id": "178864766490-8gtm0got96eoevk8gtkgs6bmm8idi15i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDq-s9Cr-BurXYEnCitaaSjzoPRyQjQ0_8"
+          "current_key": "AIzaSyAyjXpi_TLz8ALOS3r6YfVnOU1ZWrmsREU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "301660420861-ncsm5joti1q83j1p7kf048jd4o3d6dps.apps.googleusercontent.com",
+              "client_id": "178864766490-8gtm0got96eoevk8gtkgs6bmm8idi15i.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
