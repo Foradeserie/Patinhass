@@ -1,6 +1,5 @@
 package com.example.patinhas;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,13 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.firestore.FirebaseFirestore;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.Objects;
 
 public class TelaCadastro extends AppCompatActivity {
 
@@ -27,8 +26,8 @@ public class TelaCadastro extends AppCompatActivity {
     private EditText estado;
     private EditText cidade;
     private Button cadastrarButton;
-    private FirebaseFirestore db; // Firestore reference
-    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private FirebaseAuth autenticacao;
 
     private Login login;
     @Override
@@ -43,42 +42,81 @@ public class TelaCadastro extends AppCompatActivity {
         estado = findViewById(R.id.editTextText6);
         cidade = findViewById(R.id.editTextText7);
         cadastrarButton = findViewById(R.id.button);
-        mAuth =FirebaseAuth.getInstance();
+        autenticacao = FirebaseAuth.getInstance();
 
         // Initialize Firestore
         db = FirebaseFirestore.getInstance();
-
-        // Defina o OnClickListener para o botão
-        cadastrarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recuperardados();
-                salvar();
+    }
+    public void salvar(View view) {
+        autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
+        autenticacao.createUserWithEmailAndPassword(
+                login.getEmail(), login.getSenha()
+        ).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                // Após a criação bem-sucedida do usuário, você pode salvar os dados no Firestore
+                FirebaseFirestore db = ConfiguracaoFirebase.getFirebaseFirestore();
+                db.collection("usuarios")
+                        .document(login.getEmail())
+                        .set(login)
+                        .addOnSuccessListener(documentReference -> {
+                            Intent intent = new Intent(TelaCadastro.this, Opcoes.class);
+                            startActivity(intent);
+                            Toast.makeText(TelaCadastro.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+                            finish();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(TelaCadastro.this, "Erro ao salvar dados no Firestore", Toast.LENGTH_SHORT).show();
+                        });
+            } else {
+                // Tratamento de erros de autenticação
+                String excecao = "";
+                try {
+                    throw task.getException();
+                } catch (FirebaseAuthWeakPasswordException e) {
+                    excecao = "Digite uma senha mais forte!";
+                } catch (FirebaseAuthInvalidCredentialsException e) {
+                    excecao = "Por favor, digite um e-mail válido";
+                } catch (FirebaseAuthUserCollisionException e) {
+                    excecao = "Esta conta já foi cadastrada.";
+                } catch (Exception e) {
+                    excecao = "Erro ao cadastrar usuário: " + e.getMessage();
+                    e.printStackTrace();
+                }
+                Toast.makeText(TelaCadastro.this, excecao, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void salvar(){
-            mAuth.createUserWithEmailAndPassword(login.getEmail(), login.getSenha())
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                startActivity(new Intent(TelaCadastro.this,Opcoes.class));
-                            }else{
-                                Toast.makeText(TelaCadastro.this, "Erro ao criar conta", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-    }
 
-    public void recuperardados() {
-        if (email.getText().toString().equals("") || senha.getText().toString().equals("")) {
-            Toast.makeText(this, "Você deve preencher todos os dados", Toast.LENGTH_LONG).show(); // Você esqueceu o método .show() aqui
-        }else{
-            login = new Login();
-            login.setNome(email.getText().toString());
-            login.setSenha(senha.getText().toString());
+    public void validarCadastroUsuario(View view){
+
+            String textoNome  = nome.getText().toString();
+            String textoEmail = email.getText().toString();
+            String textoSenha = Objects.requireNonNull(senha.getText()).toString();
+
+            if ( !textoNome.isEmpty()){
+                if ( !textoEmail.isEmpty()){
+                    if ( !textoSenha.isEmpty()){
+
+                        Login usuario = new Login();
+                        usuario.setNome ( textoNome );
+                        usuario.setEmail( textoEmail );
+                        usuario.setSenha( textoSenha );
+
+                        salvar( view );
+
+                    }else {
+                        Toast.makeText(TelaCadastro.this, "Preencha a senha!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(TelaCadastro.this, "Preencha o e-mail!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }else {
+                Toast.makeText(TelaCadastro.this, "Preencha o nome!",
+                        Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
-}
