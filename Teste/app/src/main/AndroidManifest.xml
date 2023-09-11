@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,27 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Patinhas"
+        android:theme="@style/Theme.Teste"
         tools:targetApi="31">
-         <activity
-        android:name=".Opcoes"
-<<<<<<< HEAD
-        android:exported="false"/>
-=======
-        android:exported="false" 
->>>>>>> 572bbd0f7d46189592b909ff97671492ad151e94
-        <activity
-            android:name=".listar_usuarios"
-            android:exported="false" />
-        <activity
-            android:name=".TelaCadastro"
-            android:exported="false" />
-        <activity
-            android:name=".CadastroAnimal"
-            android:exported="false" />
-        <activity
-            android:name=".FeedAnimal"
-            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
