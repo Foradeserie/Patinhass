@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
@@ -23,52 +25,49 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        campoEmail = findViewById(R.id.editTextText3);
+        campoSenha = findViewById(R.id.editTextTextPassword);
         autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
-        campoSenha = findViewById(R.id.editTextText3);
-        campoEmail = findViewById(R.id.editTextTextPassword);
+
     }
 
-    public void logarUsuario( Login usuario ){
+    public void logarUsuario(String textoEmail,String textoSenha ){
 
-        autenticacao.signInWithEmailAndPassword(
-                usuario.getEmail(), usuario.getSenha()
-        ).addOnCompleteListener(task -> {
 
-            if ( task.isSuccessful() ){
-                abrirTelaPrincipal();
 
-            }else {
 
-                String excecao = "";
-                try {
-                    throw task.getException();
-                }catch ( FirebaseAuthInvalidUserException e){
-                    excecao = "Usuário não está cadastrado.";
-                }catch ( FirebaseAuthInvalidCredentialsException e){
-                    excecao = "E-mail e senha não correspondem a um usuário cadastrado.";
-                }catch ( Exception e ){
-                    excecao = "Erro ao cadastrar usuário: " + e.getMessage();
-                    e.printStackTrace();
-                }
-                Toast.makeText(MainActivity.this, "Erro ao fazer login!",
-                        Toast.LENGTH_SHORT).show();
+        autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
+        autenticacao.signInWithEmailAndPassword(textoEmail, textoSenha)
+                .addOnCompleteListener(this, task -> {
+                    if(task.isSuccessful()){
+                        abrirTelaPrincipal();
+                }else{
+
+            String excecao = "";
+            try {
+                throw task.getException();
+            } catch (FirebaseAuthInvalidUserException e) {
+                excecao = "Usuário não está cadastrado.";
+            } catch (FirebaseAuthInvalidCredentialsException e) {
+                excecao = "E-mail e senha não correspondem a um usuário cadastrado.";
+            } catch (Exception e) {
+                excecao = "Erro ao cadastrar usuário: " + e.getMessage();
+                e.printStackTrace();
             }
-        });
+            Toast.makeText(MainActivity.this, "Erro ao fazer login!",
+                    Toast.LENGTH_SHORT).show();
+        }
+                });
     }
 
     public void validarAutenticacaoUsuario(View view){
 
         String textoEmail = campoEmail.getText().toString();
         String textoSenha = Objects.requireNonNull(campoSenha.getText()).toString();
-
         if ( !textoEmail.isEmpty()){
             if ( !textoSenha.isEmpty()){
 
-                Login usuario = new Login();
-                usuario.setEmail( textoEmail );
-                usuario.setSenha( textoSenha );
-
-                logarUsuario( usuario );
+                logarUsuario(textoEmail, textoSenha);
 
             }else {
                 Toast.makeText(MainActivity.this, "Preencha a senha!",
@@ -78,23 +77,25 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Preencha o e-mail!",
                     Toast.LENGTH_SHORT).show();
         }
+
+
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser usuarioAtual = autenticacao.getCurrentUser();
-        if ( usuarioAtual != null ){
-            abrirTelaPrincipal();
-        }
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        FirebaseUser usuarioAtual = autenticacao.getCurrentUser();
+//        if ( usuarioAtual != null ){
+//            abrirTelaPrincipal();
+//        }
+//    }
 
     public void abrirTelaCadastro(View view){
         Intent intent = new Intent(MainActivity.this, TelaCadastro.class);
         startActivity( intent );
     }
     public void abrirTelaPrincipal(){
-        Intent intent = new Intent(MainActivity.this, MainActivity.class);
-        startActivity( intent );
+            Intent intent = new Intent(MainActivity.this, Opcoes.class);
+        startActivity( intent);
     }
 }

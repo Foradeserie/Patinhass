@@ -19,7 +19,7 @@ public class Opcoes extends AppCompatActivity {
         adotar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Opcoes.this, TelaCadastro.class);
+                Intent intent = new Intent(Opcoes.this, FeedAnimal.class);
                 startActivity(intent);
             }
         });
@@ -28,7 +28,7 @@ public class Opcoes extends AppCompatActivity {
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Opcoes.this, TelaCadastro.class);
+                Intent intent = new Intent(Opcoes.this, CadastroAnimal.class);
                 startActivity(intent);
             }
         });

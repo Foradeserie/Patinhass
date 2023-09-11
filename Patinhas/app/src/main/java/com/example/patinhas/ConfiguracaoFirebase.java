@@ -9,14 +9,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
         private static DatabaseReference database;
         private static FirebaseAuth auth;
         private static FirebaseFirestore firestore;
-        // Retorna a instância do Firestore
+
+        //Retorna as instancias dos Firebases
         public static FirebaseFirestore getFirebaseFirestore() {
             if (firestore == null) {
                 firestore = FirebaseFirestore.getInstance();
             }
             return firestore;
         }
-        //Retorna a instancia do FirebaseAuth
         public static FirebaseAuth getFirebaseAuth(){
             if ( auth == null ){
                 auth = FirebaseAuth.getInstance();

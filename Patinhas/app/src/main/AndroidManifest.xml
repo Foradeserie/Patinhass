@@ -23,6 +23,12 @@
             android:name=".TelaCadastro"
             android:exported="false" />
         <activity
+            android:name=".CadastroAnimal"
+            android:exported="false" />
+        <activity
+            android:name=".FeedAnimal"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

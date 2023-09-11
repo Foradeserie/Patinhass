@@ -50,11 +50,12 @@ public class TelaCadastro extends AppCompatActivity {
     public void salvar(View view) {
         autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
         autenticacao.createUserWithEmailAndPassword(
-                login.getEmail(), login.getSenha()
+                email.getText().toString(), senha.getText().toString()
         ).addOnCompleteListener(this, task -> {
             if (task.isSuccessful()) {
                 // Após a criação bem-sucedida do usuário, você pode salvar os dados no Firestore
                 FirebaseFirestore db = ConfiguracaoFirebase.getFirebaseFirestore();
+               
                 db.collection("usuarios")
                         .document(login.getEmail())
                         .set(login)
