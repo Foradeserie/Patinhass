@@ -35,32 +35,32 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+       // a variavel autenticação é iniciada com a instancia do serviço de autenticação do fire
         autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
-        autenticacao.signInWithEmailAndPassword(textoEmail, textoSenha)
-                .addOnCompleteListener(this, task -> {
-                    if(task.isSuccessful()){
+        autenticacao.signInWithEmailAndPassword(textoEmail, textoSenha)  //faz a autenticação do usuario
+                .addOnCompleteListener(this, task -> { //diz o que o aplicativo deve fazer dependendo do resultado
+                    if(task.isSuccessful()){            //verifica a tentativa de login
                         abrirTelaPrincipal();
-                }else{
+                    }else{
 
-            String excecao = "";
-            try {
-                throw task.getException();
-            } catch (FirebaseAuthInvalidUserException e) {
-                excecao = "Usuário não está cadastrado.";
-            } catch (FirebaseAuthInvalidCredentialsException e) {
-                excecao = "E-mail e senha não correspondem a um usuário cadastrado.";
-            } catch (Exception e) {
-                excecao = "Erro ao cadastrar usuário: " + e.getMessage();
-                e.printStackTrace();
-            }
-            Toast.makeText(MainActivity.this, "Erro ao fazer login!",
-                    Toast.LENGTH_SHORT).show();
-        }
+                        String excecao = "";
+                        try {
+                            throw task.getException();
+                        } catch (FirebaseAuthInvalidUserException e) {
+                            excecao = "Usuário não está cadastrado.";
+                        } catch (FirebaseAuthInvalidCredentialsException e) {
+                            excecao = "E-mail ou senha não correspondem a um usuário cadastrado.";
+                        } catch (Exception e) {
+                            excecao = "Erro ao cadastrar usuário: " + e.getMessage();
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(MainActivity.this, "Erro ao fazer login!",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 });
     }
 
-    public void validarAutenticacaoUsuario(View view){
+    public void validarAutenticacaoUsuario(View view){ //verifica se não tem nenhum campo vazio, se não tiver chama o logarUsuario
 
         String textoEmail = campoEmail.getText().toString();
         String textoSenha = Objects.requireNonNull(campoSenha.getText()).toString();
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity( intent );
     }
     public void abrirTelaPrincipal(){
-            Intent intent = new Intent(MainActivity.this, Opcoes.class);
+        Intent intent = new Intent(MainActivity.this, Opcoes.class);
         startActivity( intent);
     }
 }

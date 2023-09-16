@@ -15,8 +15,6 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Objects;
-
 public class TelaCadastro extends AppCompatActivity {
 
     private EditText nome;
@@ -26,10 +24,9 @@ public class TelaCadastro extends AppCompatActivity {
     private EditText estado;
     private EditText cidade;
     private Button cadastrarButton;
-    private FirebaseFirestore db;
     private FirebaseAuth autenticacao;
+    private FirebaseFirestore db;
 
-    private Login login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,82 +39,69 @@ public class TelaCadastro extends AppCompatActivity {
         estado = findViewById(R.id.editTextText6);
         cidade = findViewById(R.id.editTextText7);
         cadastrarButton = findViewById(R.id.button);
-        autenticacao = FirebaseAuth.getInstance();
+        cadastrarButton.setOnClickListener(view -> validarCadastroUsuario());
 
-        // Initialize Firestore
+        autenticacao = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
     }
-    public void salvar(View view) {
-        autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
-        autenticacao.createUserWithEmailAndPassword(
-                email.getText().toString(), senha.getText().toString()
-        ).addOnCompleteListener(this, task -> {
-            if (task.isSuccessful()) {
-                // Após a criação bem-sucedida do usuário, você pode salvar os dados no Firestore
-                FirebaseFirestore db = ConfiguracaoFirebase.getFirebaseFirestore();
-               
-                db.collection("usuarios")
-                        .document(login.getEmail())
-                        .set(login)
-                        .addOnSuccessListener(documentReference -> {
-                            Intent intent = new Intent(TelaCadastro.this, Opcoes.class);
-                            startActivity(intent);
-                            Toast.makeText(TelaCadastro.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_SHORT).show();
-                            finish();
-                        })
-                        .addOnFailureListener(e -> {
-                            Toast.makeText(TelaCadastro.this, "Erro ao salvar dados no Firestore", Toast.LENGTH_SHORT).show();
-                        });
-            } else {
-                // Tratamento de erros de autenticação
-                String excecao = "";
-                try {
-                    throw task.getException();
-                } catch (FirebaseAuthWeakPasswordException e) {
-                    excecao = "Digite uma senha mais forte!";
-                } catch (FirebaseAuthInvalidCredentialsException e) {
-                    excecao = "Por favor, digite um e-mail válido";
-                } catch (FirebaseAuthUserCollisionException e) {
-                    excecao = "Esta conta já foi cadastrada.";
-                } catch (Exception e) {
-                    excecao = "Erro ao cadastrar usuário: " + e.getMessage();
-                    e.printStackTrace();
-                }
-                Toast.makeText(TelaCadastro.this, excecao, Toast.LENGTH_SHORT).show();
-            }
-        });
+
+    private void salvarDadosUsuario(String userID) {
+        String nomeUsuario = nome.getText().toString();
+        String emailUsuario = email.getText().toString();
+        String senhaUsuario = senha.getText().toString();
+        String cidadeUsuario = cidade.getText().toString();
+        String estadoUsuario = estado.getText().toString();
+        String dataNascimentoUsuario= dataNascimento.getText().toString();
+
+        //instanciando
+        Login usuario = new Login(nomeUsuario, emailUsuario, senhaUsuario, cidadeUsuario, estadoUsuario, dataNascimentoUsuario);
+
+        // Salve os dados do usuário no Firestore
+        db.collection("Usuarios")
+                .document(userID) //identifica a coleção e o documento
+                .set(usuario)
+                .addOnSuccessListener(documentReference -> {    //diz o que o aplicativo deve fazer dependendo do resultado
+                    Intent intent = new Intent(TelaCadastro.this, Opcoes.class);
+                    startActivity(intent);
+                    Toast.makeText(TelaCadastro.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(TelaCadastro.this, "Erro ao salvar dados no Firestore", Toast.LENGTH_SHORT).show();
+                });
     }
 
-
-    public void validarCadastroUsuario(View view){
-
-            String textoNome  = nome.getText().toString();
-            String textoEmail = email.getText().toString();
-            String textoSenha = Objects.requireNonNull(senha.getText()).toString();
-
-            if ( !textoNome.isEmpty()){
-                if ( !textoEmail.isEmpty()){
-                    if ( !textoSenha.isEmpty()){
-
-                        Login usuario = new Login();
-                        usuario.setNome ( textoNome );
-                        usuario.setEmail( textoEmail );
-                        usuario.setSenha( textoSenha );
-
-                        salvar( view );
-
-                    }else {
-                        Toast.makeText(TelaCadastro.this, "Preencha a senha!",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }else {
-                    Toast.makeText(TelaCadastro.this, "Preencha o e-mail!",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }else {
-                Toast.makeText(TelaCadastro.this, "Preencha o nome!",
-                        Toast.LENGTH_SHORT).show();
-            }
-
+    private void validarCadastroUsuario() {
+        String textoNome = nome.getText().toString();
+        String textoEmail = email.getText().toString();
+        String textoSenha = senha.getText().toString();
+        String textoCidade = cidade.getText().toString();
+        String textoEstado = estado.getText().toString();
+        String textoDataNascimento= dataNascimento.getText().toString();
+        if (!textoNome.isEmpty() && !textoEmail.isEmpty() && !textoSenha.isEmpty() && !textoCidade.isEmpty() && !textoEstado.isEmpty() && !textoDataNascimento.isEmpty()) {
+            autenticacao.createUserWithEmailAndPassword(textoEmail, textoSenha) //cria o usu
+                    .addOnCompleteListener(this, task -> {   //diz o que o aplicativo deve fazer dependendo do resultado
+                        if (task.isSuccessful()) {
+                            salvarDadosUsuario(autenticacao.getCurrentUser().getUid());
+                        } else {
+                            String excecao = "";
+                            try {
+                                throw task.getException();
+                            } catch (FirebaseAuthWeakPasswordException e) {
+                                excecao = "Digite uma senha mais forte!";
+                            } catch (FirebaseAuthInvalidCredentialsException e) {
+                                excecao = "Por favor, digite um e-mail válido";
+                            } catch (FirebaseAuthUserCollisionException e) {
+                                excecao = "Esta conta já foi cadastrada.";
+                            } catch (Exception e) {
+                                excecao = "Erro ao cadastrar usuário: " + e.getMessage();
+                                e.printStackTrace();
+                            }
+                            Toast.makeText(TelaCadastro.this, excecao, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            Toast.makeText(TelaCadastro.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
         }
     }
+}

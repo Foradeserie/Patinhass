@@ -95,7 +95,7 @@
         app:layout_constraintTop_toBottomOf="@+id/idadeAninal" />
 
     <EditText
-        android:id="@+id/Pesoanimal"
+        android:id="@+id/pesoAnimal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Peso"
@@ -120,7 +120,7 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Pesoanimal" />
+        app:layout_constraintTop_toBottomOf="@+id/pesoAnimal" />
 
     <EditText
         android:id="@+id/historia"
@@ -150,18 +150,20 @@
 
 
     <Button
-        android:id="@+id/cadastraranimal"
+        android:id="@+id/bCadastrarAnimal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Cadastre-se"
+        android:text="Cadastrar"
         android:textSize="16sp"
-        android:onClick="salvar"
+        android:onClick="validarCadastroAnimal"
         app:layout_constraintTop_toBottomOf="@+id/buttonSelectImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp" />
+        android:layout_marginEnd="16dp"
+
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

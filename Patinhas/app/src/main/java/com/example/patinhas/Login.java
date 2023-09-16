@@ -1,10 +1,8 @@
 package com.example.patinhas;
 
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.PropertyName;
 
 import java.io.Serializable;
-import java.util.Map;
 
 public class Login implements Serializable {
     private String nome;
@@ -13,10 +11,13 @@ public class Login implements Serializable {
     private String senha;
     private String estado;
     private String cidade;
-    private long id;
-
-    public Login() {
-        // Construtor vazio necessário para Firestore
+    public Login(String nome, String email, String senha, String cidade, String estado, String dataNascimento) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.dataNascimento = dataNascimento;
     }
 
     @PropertyName("nome")
@@ -77,16 +78,6 @@ public class Login implements Serializable {
     @PropertyName("cidade")
     public void setCidade(String cidade) {
         this.cidade = cidade;
-    }
-
-    @PropertyName("id")
-    public long getId() {
-        return id;
-    }
-
-    @PropertyName("id")
-    public void setId(long id) {
-        this.id = id;
     }
 
     @Override

@@ -28,7 +28,7 @@ public class Opcoes extends AppCompatActivity {
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Opcoes.this, CadastroAnimal.class);
+                Intent intent = new Intent(Opcoes.this, CadastrarAnimal.class);
                 startActivity(intent);
             }
         });
