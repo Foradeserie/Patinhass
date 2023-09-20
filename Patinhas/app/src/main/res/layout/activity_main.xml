@@ -29,7 +29,10 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/bordapreta"
+        android:inputType="text"
         android:hint="Email"
+        android:paddingStart="8dp"
+        android:textColorHint="#808080"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -41,6 +44,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Senha"
+        android:inputType="textPassword"
+        android:paddingStart="8dp"
+        android:textColorHint="#808080"
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/editTextText3"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,16 +99,5 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:onClick="abrirTelaCadastro"/>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Ver Banco de dados"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4"
-        android:onClick="db"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
