@@ -7,37 +7,38 @@
     android:background="#9ca4dc"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView1"
+
+    <ImageView
+        android:id="@+id/patinhas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="145dp"
-        android:text="Patinhas"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="50sp"
-        android:textStyle="bold"
+        android:layout_marginStart="49dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginBottom="488dp"
+        android:src="@drawable/patinhas"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintWidth_percent="0.4" />
 
     <EditText
         android:id="@+id/editTextText3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/bordapreta"
-        android:inputType="text"
         android:hint="Email"
+        android:inputType="text"
         android:paddingStart="8dp"
-        android:textColorHint="#808080"
         android:textColor="#000000"
+        android:textColorHint="#808080"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+        tools:layout_editor_absoluteY="232dp"
+        app:layout_constraintTop_toBottomOf="@+id/patinhas"/>
 
     <EditText
         android:id="@+id/editTextTextPassword"

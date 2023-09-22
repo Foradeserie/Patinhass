@@ -2,8 +2,10 @@ package com.example.patinhas;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Scroller;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +44,10 @@ public class CadastrarAnimal extends AppCompatActivity {
         peso = findViewById(R.id.pesoAnimal);
         personalidade = findViewById(R.id.personalidade);
         historia = findViewById(R.id.historia);
+
+        historia.setScroller(new Scroller(this));
+        historia.setVerticalScrollBarEnabled(true);
+        historia.setMovementMethod(new ScrollingMovementMethod());
 
         buttonanimal = findViewById(R.id.bCadastrarAnimal);
         buttonanimal.setOnClickListener(view -> validarCadastroAnimal());

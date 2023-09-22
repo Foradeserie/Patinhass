@@ -8,20 +8,33 @@
     android:background="#9ca4dc"
     tools:context=".TelaCadastro">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="49dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/patinhas" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="CADASTRE SEU ANIMAL"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="200dp" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/nomeAnimal"
@@ -123,31 +136,32 @@
         app:layout_constraintTop_toBottomOf="@+id/pesoAnimal" />
 
     <EditText
-        android:id="@+id/historia"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Conte um pouquinho da história dele(a)"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/bordapreta"
-        android:inputType="textMultiLine"
+       android:id="@+id/historia"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:hint="Conte um pouquinho da história dele(a)"
+       android:layout_marginStart="16dp"
+       android:layout_marginTop="16dp"
+       android:layout_marginEnd="16dp"
+       android:background="@drawable/bordapreta"                             
+       android:inputType="textMultiLine"
+       android:maxLines="4"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/personalidade" />
+
+    <ImageView
+        android:id="@+id/galeria"
+        android:layout_width="441dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="47dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personalidade" />
-
-    <Button
-        android:id="@+id/buttonSelectImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/historia"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Selecionar Imagem" />
-
+        app:srcCompat="@drawable/galeria"
+        />
 
     <Button
         android:id="@+id/bCadastrarAnimal"
@@ -156,7 +170,7 @@
         android:text="Cadastrar"
         android:textSize="16sp"
         android:onClick="validarCadastroAnimal"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSelectImage"
+        app:layout_constraintTop_toBottomOf="@+id/galeria"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
@@ -164,6 +178,8 @@
         android:layout_marginEnd="16dp"
 
         />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

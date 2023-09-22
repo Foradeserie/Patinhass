@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         campoSenha = findViewById(R.id.editTextTextPassword);
         autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
 
+
     }
 
     public void logarUsuario(String textoEmail,String textoSenha ){
@@ -50,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
                             excecao = "Usuário não está cadastrado.";
                         } catch (FirebaseAuthInvalidCredentialsException e) {
                             excecao = "E-mail ou senha não correspondem a um usuário cadastrado.";
+                        } catch (FirebaseNetworkException e) {
+                            excecao = "Sem conexão com a internet. Verifique sua conexão e tente novamente.";
                         } catch (Exception e) {
                             excecao = "Erro ao cadastrar usuário: " + e.getMessage();
                             e.printStackTrace();
