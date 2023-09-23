@@ -161,6 +161,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/historia"
         app:srcCompat="@drawable/galeria"
+        android:onClick="abrirGaleria"
         />
 
     <Button
