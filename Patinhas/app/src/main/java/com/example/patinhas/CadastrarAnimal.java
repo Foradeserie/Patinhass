@@ -1,8 +1,11 @@
 package com.example.patinhas;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View; // Importe a classe View corretamente
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Scroller;
@@ -10,9 +13,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.patinhas.CadastroAnimal;
-import com.example.patinhas.FeedAnimal;
-import com.example.patinhas.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,6 +31,8 @@ public class CadastrarAnimal extends AppCompatActivity {
     private Button buttonanimal;
 
     private FirebaseFirestore db;
+
+    private static final int SEU_CODIGO_DE_REQUISICAO = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,21 @@ public class CadastrarAnimal extends AppCompatActivity {
         buttonanimal.setOnClickListener(view -> validarCadastroAnimal());
 
         db = FirebaseFirestore.getInstance();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == SEU_CODIGO_DE_REQUISICAO) {
+            if (resultCode == RESULT_OK && data != null) {
+                // A imagem foi selecionada com sucesso.
+                Uri selectedImageUri = data.getData();
+                Toast.makeText(this, "Uri da imagem selecionada: " + selectedImageUri.toString(), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Ocorreu um erro ao selecionar a imagem.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void salvarDadosAnimal() {
@@ -107,4 +124,10 @@ public class CadastrarAnimal extends AppCompatActivity {
             Toast.makeText(CadastrarAnimal.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void abrirGaleria(View view) {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, SEU_CODIGO_DE_REQUISICAO);
+    }
+
 }
