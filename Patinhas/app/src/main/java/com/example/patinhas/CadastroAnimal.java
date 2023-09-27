@@ -1,6 +1,9 @@
 package com.example.patinhas;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 public class CadastroAnimal implements Serializable {
     public String nome;
     public String porte;
@@ -9,6 +12,12 @@ public class CadastroAnimal implements Serializable {
     public String peso;
     public String personalidade;
     public String historia;
+
+    private List<String> imageUrls;
+
+    public List<String> getImageUrls() {
+        return imageUrls;
+    }
 
     CadastroAnimal(String nome, String porte, String raca, String genero, String peso,
                    String personalidade, String historia){
@@ -19,6 +28,8 @@ public class CadastroAnimal implements Serializable {
     this.peso=peso;
     this.personalidade=personalidade;
     this.historia=historia;
+    this.imageUrls = new ArrayList<>();
+
     }
 
     public String getNome() {
@@ -75,5 +86,13 @@ public class CadastroAnimal implements Serializable {
 
     public void setHistoria(String historia) {
         this.historia = historia;
+    }
+
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
+    }
+
+    public void addImageUrl(String imageUrl) {
+        this.imageUrls.add(imageUrl);
     }
 }
