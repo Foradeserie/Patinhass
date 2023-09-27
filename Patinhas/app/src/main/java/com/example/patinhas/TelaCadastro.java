@@ -154,7 +154,6 @@ public class TelaCadastro extends AppCompatActivity {
 
         cadastrarButton = findViewById(R.id.button);
         cadastrarButton.setOnClickListener(view -> validarCadastroUsuario());
-
         autenticacao = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
     }
@@ -174,6 +173,7 @@ public class TelaCadastro extends AppCompatActivity {
         String cidadeUsuario = cidade.getSelectedItem().toString();
         String[] estadoUsuario = getResources().getStringArray(R.array.estados);
         String estadoSelecionado = estadoUsuario[spinnerEstado.getSelectedItemPosition()];
+
         // Obtendo a data de nascimento do DatePicker
         int dia = dataNascimento.getDayOfMonth();
         int mes = dataNascimento.getMonth();

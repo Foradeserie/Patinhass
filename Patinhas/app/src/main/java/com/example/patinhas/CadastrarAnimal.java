@@ -79,13 +79,12 @@ public class CadastrarAnimal extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {  //qualquer código de manipulação padrão pode ser executado.
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == SEU_CODIGO_DE_REQUISICAO) {
             if (resultCode == RESULT_OK && data != null) {
-                // Uma ou mais imagens foram selecionadas com sucesso.
-                if (data.getClipData() != null) {
+                if (data.getClipData() != null) { // Uma ou mais imagens foram selecionadas com sucesso.
                     int count = data.getClipData().getItemCount();
                     for (int i = 0; i < count; i++) {
                         selectedImageUri = data.getClipData().getItemAt(i).getUri();
@@ -95,7 +94,7 @@ public class CadastrarAnimal extends AppCompatActivity {
                     selectedImageUri = data.getData();
                     selectedImageUris.add(selectedImageUri);
                 }
-                imageAdapter.notifyDataSetChanged();
+                imageAdapter.notifyDataSetChanged(); //garante que os updades foram para a interface de usuario
                 Toast.makeText(this, "Imagens selecionadas com sucesso", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Ocorreu um erro ao selecionar imagens.", Toast.LENGTH_SHORT).show();
@@ -104,7 +103,7 @@ public class CadastrarAnimal extends AppCompatActivity {
     }
 
     private void salvarDadosAnimal() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser(); //verifica se o usuario t autenticado ou não
         if (currentUser != null) {
             String userID = currentUser.getUid();
             String nomeAnimal = nome.getText().toString();
@@ -116,26 +115,26 @@ public class CadastrarAnimal extends AppCompatActivity {
             String historiaAnimal = historia.getText().toString();
 
 
-            // Gerar um UID único para o documento do animal
+            // Gera um UID único para o documento do animal
             String animalUID = UUID.randomUUID().toString();
 
-            // Instanciando o objeto CadastroAnimal
+            // Instanciando
             CadastroAnimal animal = new CadastroAnimal(nomeAnimal, porteAnimal, racaAnimal, generoAnimal,
                     pesoAnimal, personalidadeAnimal, historiaAnimal);
 
-            // Upload das imagens selecionadas para o Firebase Storage
+            // faz Upload das imagens para o Firebase Storage
             for (Uri imageUri : selectedImageUris) {
                 String imageName = UUID.randomUUID().toString() + ".jpg"; // Gere um nome único para a imagem
                 StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("images/" + imageName);
 
                 imageRef.putFile(imageUri)
                         .addOnSuccessListener(taskSnapshot -> {
-                            // Imagem carregada com sucesso, obtenha a URL da imagem
+                            // Imagem carregada com sucesso
                             imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                                // Adicione a URL da imagem ao objeto CadastroAnimal
+                                // Adiciona a URL da imagem ao objeto animal
                                 animal.addImageUrl(uri.toString());
 
-                                // Salvar os dados do animal no Firestore com o UID único
+                                // Salva os dados do animal no Firestore com o UID único
                                 db.collection("Cadastroanimal")
                                         .document(animalUID)
                                         .set(animal)

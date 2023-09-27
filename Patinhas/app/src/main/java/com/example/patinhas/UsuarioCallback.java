@@ -8,5 +8,5 @@ import java.util.List;
     }
 
 
-
+// diz se deu certo a comunicação com o usuario ou não
 

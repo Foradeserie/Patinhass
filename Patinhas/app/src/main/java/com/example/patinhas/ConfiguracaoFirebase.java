@@ -13,13 +13,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
         //Retorna as instancias dos Firebases
         public static FirebaseFirestore getFirebaseFirestore() {
             if (firestore == null) {
-                firestore = FirebaseFirestore.getInstance();
+                firestore = FirebaseFirestore.getInstance();        //retorna a instancia do firestore
             }
             return firestore;
         }
         public static FirebaseAuth getFirebaseAuth(){
             if ( auth == null ){
-                auth = FirebaseAuth.getInstance();
+                auth = FirebaseAuth.getInstance();                  //retorna a instancia do serviço de autenticação do usuario
             }
             return auth;
         }

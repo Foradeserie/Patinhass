@@ -155,8 +155,11 @@
         android:layout_width="463dp"
         android:layout_height="81dp"
         android:layout_marginStart="-180dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="5dp"
         android:onClick="abrirGaleria"
+        app:layout_constraintEnd_toStartOf="@+id/recyclerViewImages"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/historia"
         app:srcCompat="@drawable/galeria" />

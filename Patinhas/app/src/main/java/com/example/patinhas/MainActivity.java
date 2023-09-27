@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
        // a variavel autenticação é iniciada com a instancia do serviço de autenticação do fire
         autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
         autenticacao.signInWithEmailAndPassword(textoEmail, textoSenha)  //faz a autenticação do usuario
-                .addOnCompleteListener(this, task -> { //diz o que o aplicativo deve fazer dependendo do resultado
-                    if(task.isSuccessful()){            //verifica a tentativa de login
+                .addOnCompleteListener(this, task -> {   //diz o que o aplicativo deve fazer dependendo do resultado
+                    if(task.isSuccessful()){                    //verifica a tentativa de login
                         abrirTelaPrincipal();
                     }else{
 
@@ -58,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
                             excecao = "Erro ao cadastrar usuário: " + e.getMessage();
                             e.printStackTrace();
                         }
-                        Toast.makeText(MainActivity.this, "Erro ao fazer login!",
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, excecao, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
