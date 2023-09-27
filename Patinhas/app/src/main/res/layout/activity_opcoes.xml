@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="292dp"
-        android:text="Cadastrar"
+        android:text="Registrar"
         android:textColor="#000000"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
