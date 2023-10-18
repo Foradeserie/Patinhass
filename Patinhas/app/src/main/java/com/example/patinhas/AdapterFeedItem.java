@@ -34,20 +34,19 @@ public class AdapterFeedItem extends RecyclerView.Adapter<AdapterFeedItem.FeedVi
 
     @Override
     public void onBindViewHolder(@NonNull FeedViewHolder holder, int position) {
-        FeedViewHolder fvHelper =(FeedViewHolder) holder;
+        FeedViewHolder fvHelper = (FeedViewHolder) holder;
         FeedItem item = feedItems.get(position);
-        fvHelper.imageView.setImageResource(item.getFotoPerfil());
-        fvHelper.textView1.setText(item.getNomePessoa());
-        fvHelper.imageView.setImageResource(item.getFotos());
-        fvHelper.fotos.setText(item.getLegenda());
 
-        // Configurar o clique do botão
-        fvHelper.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Lógica para o clique do botão aqui
-            }
-        });
+        fvHelper.imageView.setImageDrawable(null);
+
+
+//        fvHelper.imageView.setImageResource(item.getFotoPerfil());
+//        fvHelper.textView1.setText(item.getNomePessoa());
+//        fvHelper..setImageResource(item.getImageUrl());
+        fvHelper.legenda.setText(item.getHistoria());
+
+        fvHelper.textView1.setText(item.getNome());
+
     }
 
     @Override
@@ -58,7 +57,7 @@ public class AdapterFeedItem extends RecyclerView.Adapter<AdapterFeedItem.FeedVi
     public static class FeedViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView textView1;
-        TextView fotos;
+        TextView legenda;
         Button button;
 
             FeedViewHolder(@NonNull View itemView) {
@@ -66,7 +65,7 @@ public class AdapterFeedItem extends RecyclerView.Adapter<AdapterFeedItem.FeedVi
             imageView = itemView.findViewById(R.id.perfil);
             textView1 = itemView.findViewById(R.id.nome);
             imageView = itemView.findViewById(R.id.fotos);
-            fotos = itemView.findViewById(R.id.legenda);
+            legenda = itemView.findViewById(R.id.legenda);
             button = itemView.findViewById(R.id.chamar);
         }
     }

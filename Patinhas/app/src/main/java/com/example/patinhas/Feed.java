@@ -1,20 +1,30 @@
 package com.example.patinhas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.checkerframework.common.reflection.qual.NewInstance;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +37,7 @@ public class Feed extends AppCompatActivity {
     RecyclerView recyclerview;
     private AdapterFeedItem adapterFeedItem = null;
     private FirebaseFirestore db;
+    String usuarioid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,5 +83,24 @@ public class Feed extends AppCompatActivity {
                         }
                     });
         }
+
+        }
+
+    public void perfil(View view){
+        Intent intent = new Intent(Feed.this, Perfil.class);
+        startActivity(intent);
     }
-}
+
+    public void sair(View view){
+        Intent intent = new Intent(Feed.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+
+
+    }
+
+
+

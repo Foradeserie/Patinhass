@@ -19,7 +19,7 @@ public class Opcoes extends AppCompatActivity {
         adotar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Opcoes.this, FeedAnimal.class);
+                Intent intent = new Intent(Opcoes.this, Feed.class);
                 startActivity(intent);
             }
         });

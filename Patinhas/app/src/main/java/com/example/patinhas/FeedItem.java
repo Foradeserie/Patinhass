@@ -1,52 +1,79 @@
 package com.example.patinhas;
 
-import java.util.ArrayList;
 import java.util.List;
-import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
-public class FeedItem extends RecyclerView.ViewHolder{
-        private int fotoPerfil;
-        private String nomePessoa;
-        private int fotos;
-        private String legenda;
-        private String botaoChamar;
 
-        public FeedItem(View itemView) {
-            super(itemView);
-        }
+public class FeedItem {
 
-        public FeedItem(int fotoPerfil, String nomePessoa, int fotos, String legenda, String botaoChamar, View itemView) {
-            super(itemView);
-            this.fotoPerfil = fotoPerfil;
-            this.nomePessoa = nomePessoa;
-            this.fotos = fotos;
-            this.legenda = legenda;
-            this.botaoChamar = botaoChamar;
-        }
+    private String genero;
+    private String historia;
+    private List<String> imageUrl;
+    private String nome;
+    private String personalidade;
+    private String peso;
+    private String porte;
+    private String raca;
 
-    public String getNomePessoa() {
-        return nomePessoa;
+    public String getGenero() {
+        return genero;
     }
 
-    public String getLegenda() {
-        return legenda;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
-    public String getBotaoChamar() {
-        return botaoChamar;
+    public String getHistoria() {
+        return historia;
     }
 
-    public int getFotoPerfil() {
-        return fotoPerfil;
+    public void setHistoria(String historia) {
+        this.historia = historia;
     }
 
-    public int getFotos() {
-        return fotos;
+    public List<String> getImageUrl() {
+        return imageUrl;
     }
 
-    public void setBotaoChamar(java.lang.String botaoChamar) {
-        this.botaoChamar = botaoChamar;
+    public void setImageUrl(List<String> imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
+    public String getNome() {
+        return nome;
+    }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getPersonalidade() {
+        return personalidade;
+    }
+
+    public void setPersonalidade(String personalidade) {
+        this.personalidade = personalidade;
+    }
+
+    public String getPeso() {
+        return peso;
+    }
+
+    public void setPeso(String peso) {
+        this.peso = peso;
+    }
+
+    public String getPorte() {
+        return porte;
+    }
+
+    public void setPorte(String porte) {
+        this.porte = porte;
+    }
+
+    public String getRaca() {
+        return raca;
+    }
+
+    public void setRaca(String raca) {
+        this.raca = raca;
+    }
 }

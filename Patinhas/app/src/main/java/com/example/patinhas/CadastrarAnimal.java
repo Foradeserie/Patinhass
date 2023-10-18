@@ -139,7 +139,7 @@ public class CadastrarAnimal extends AppCompatActivity {
                                         .document(animalUID)
                                         .set(animal)
                                         .addOnSuccessListener(documentReference -> {
-                                            Intent intent = new Intent(CadastrarAnimal.this, FeedAnimal.class);
+                                            Intent intent = new Intent(CadastrarAnimal.this, Feed.class);
                                             startActivity(intent);
                                             Toast.makeText(CadastrarAnimal.this, "Sucesso ao cadastrar animal", Toast.LENGTH_SHORT).show();
                                             finish();
