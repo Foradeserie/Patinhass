@@ -33,7 +33,6 @@ public class Perfil extends AppCompatActivity {
         // Obtendo o ID do usuário atual
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        // Substitua 'sua_colecao' pelo nome da sua coleção no Firestore
         DocumentReference docRef = FirebaseFirestore.getInstance().collection("Usuarios").document(userId);
 
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
